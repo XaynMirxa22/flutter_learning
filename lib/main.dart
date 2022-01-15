@@ -5,6 +5,7 @@ import 'package:lesson_1/pages/homepage.dart';
 import 'package:lesson_1/pages/listViewPage.dart';
 import 'package:lesson_1/pages/part_4.dart';
 import 'package:lesson_1/pages/table.dart';
+import 'package:lesson_1/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,26 +17,36 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'MXK Learning App',
-        theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
-            fontFamily: GoogleFonts.laila().fontFamily),
-        //part 2 Input,Radio,Check,Label
-        //home: const HomePage());
+      debugShowCheckedModeBanner: false,
+      title: 'MXK Learning App',
+      theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          fontFamily: GoogleFonts.laila().fontFamily),
+      //part 2 Input,Radio,Check,Label
+      //home: const HomePage());
 
-        //TODO:part 3
-        //List View
-        // home: const ListViewPage());
+      //TODO:part 3
+      //List View
+      // home: const ListViewPage());
 
-        //Grid View
-        //home: const GridViewPage());
+      //Grid View
+      //home: const GridViewPage());
 
-        //Table View
-        //home: const TablePage());
+      //Table View
+      //home: const TablePage());
 
-        //TODO: Part4
-        // Adding Image
-        home: Part4());
+      //TODO: Part4
+      // Adding Image
+      //home: Part4()
+
+      //TODO: Part 5
+      //Login With Navigation
+
+      routes: {
+        "/": (context) => const Part4(),
+        MyRoutes.homeRoute: (context) => const HomePage(),
+        MyRoutes.loginRoute: (context) => const Part4(),
+      },
+    );
   }
 }
