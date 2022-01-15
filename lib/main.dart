@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lesson_1/pages/gridViewPage.dart';
 import 'package:lesson_1/pages/homepage.dart';
 import 'package:lesson_1/pages/listViewPage.dart';
+import 'package:lesson_1/pages/part_4.dart';
 import 'package:lesson_1/pages/table.dart';
 
 void main() {
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MXK Learning App',
         theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
+            primarySwatch: Colors.deepPurple,
+            fontFamily: GoogleFonts.laila().fontFamily),
         //part 2 Input,Radio,Check,Label
         //home: const HomePage());
 
@@ -30,6 +32,10 @@ class MyApp extends StatelessWidget {
         //home: const GridViewPage());
 
         //Table View
-        home: const TablePage());
+        //home: const TablePage());
+
+        //TODO: Part4
+        // Adding Image
+        home: Part4());
   }
 }
