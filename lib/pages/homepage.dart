@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                               checkBox1 = val;
                             });
                           }),
-                      Text("Private")
+                      const Text("Private")
                     ],
                   )
                 ],
