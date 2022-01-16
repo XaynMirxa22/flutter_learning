@@ -43,9 +43,13 @@ class _Part4State extends State<Part4> {
                 child: Column(
                   children: [
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onChanged: (value) {},
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return 'Username cannot be empty';
+                        } else {
+                          return null;
                         }
                       },
                       decoration: const InputDecoration(
@@ -54,11 +58,14 @@ class _Part4State extends State<Part4> {
                       ),
                     ),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value.toString().isEmpty) {
                           return 'Password cannot be empty';
-                        } else if (value.toString().length > 6) {
+                        } else if (value.toString().length < 6) {
                           return 'Username should be atleast 6 characters';
+                        } else {
+                          return null;
                         }
                       },
                       obscureText: true,
@@ -149,7 +156,6 @@ class _Part4State extends State<Part4> {
     setState(() {
       result = "done";
     });
-    await Future.delayed(const Duration(seconds: 1));
     Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
   }
 }
