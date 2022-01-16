@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
 import 'package:lesson_1/utils/routes.dart';
 
 class Part4 extends StatefulWidget {
@@ -9,7 +13,7 @@ class Part4 extends StatefulWidget {
 }
 
 class _Part4State extends State<Part4> {
-  bool requestApi = false;
+  String result = "";
 
   @override
   Widget build(BuildContext context) {
@@ -49,47 +53,79 @@ class _Part4State extends State<Part4> {
               ),
             ),
 
-            InkWell(
-              onTap: () async {
+            // InkWell(
+            //   onTap: () async {
+            //     setState(() {
+            //       requestApi = true;
+            //     });
+
+            //     await Future.delayed(const Duration(seconds: 2));
+            //     Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+            //   },
+            //   child: AnimatedContainer(
+            //     duration: const Duration(seconds: 2),
+            //     width: requestApi ? 50.0 : 150.0,
+            //     height: 50.0,
+            //     alignment: Alignment.center,
+            //     child: requestApi
+            //         ? const Icon(Icons.done, color: Colors.white)
+            //         : const Text(
+            //             "Login",
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontWeight: FontWeight.bold,
+            //               fontSize: 22.0,
+            //             ),
+            //           ),
+            //     decoration: BoxDecoration(
+            //       color: Colors.deepPurpleAccent,
+            //       borderRadius: BorderRadius.circular(requestApi ? 80 : 8),
+            //       //shape: requestApi ? BoxShape.circle : BoxShape.rectangle,
+            //     ),
+            //   ),
+            // )
+
+            ElevatedButton(
+              onPressed: () async {
                 setState(() {
-                  requestApi = true;
+                  result = "in-progress";
                 });
-
-                await Future.delayed(const Duration(seconds: 2));
-                Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+                userAuthentication();
               },
-              child: AnimatedContainer(
-                duration: const Duration(seconds: 2),
-                width: requestApi ? 50.0 : 150.0,
-                height: 50.0,
-                alignment: Alignment.center,
-                child: requestApi
-                    ? const Icon(Icons.done, color: Colors.white)
-                    : const Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22.0,
-                        ),
+              child: result == "in-progress"
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 3,
                       ),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurpleAccent,
-                  borderRadius: BorderRadius.circular(requestApi ? 80 : 8),
-                  //shape: requestApi ? BoxShape.circle : BoxShape.rectangle,
-                ),
-              ),
-            )
-
-            // ElevatedButton(
-            //     onPressed: () {
-            //       Navigator.pushNamed(context, MyRoutes.homeRoute);
-            //     },
-            //     child: const Text("Login"),
-            //     style: TextButton.styleFrom(minimumSize: const Size(120, 40))),
+                    )
+                  : result == 'done'
+                      ? const Icon(
+                          Icons.done,
+                          color: Colors.white,
+                        )
+                      : const Text("Login"),
+              style: TextButton.styleFrom(minimumSize: const Size(120, 40)),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  userAuthentication() async {
+    var api =
+        'https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0';
+
+    var res = await http.read(Uri.parse(api));
+    var json = jsonDecode(res.toString());
+    print(json["dataseries"]);
+    setState(() {
+      result = "done";
+    });
+    await Future.delayed(Duration(seconds: 1));
+    Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
   }
 }
