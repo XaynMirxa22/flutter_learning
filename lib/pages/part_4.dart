@@ -63,7 +63,7 @@ class _Part4State extends State<Part4> {
                         if (value.toString().isEmpty) {
                           return 'Password cannot be empty';
                         } else if (value.toString().length < 6) {
-                          return 'Username should be atleast 6 characters';
+                          return 'Password should be atleast 6 characters';
                         } else {
                           return null;
                         }

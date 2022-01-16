@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lesson_1/pages/dashboard.dart';
 import 'package:lesson_1/pages/gridViewPage.dart';
 import 'package:lesson_1/pages/homepage.dart';
 import 'package:lesson_1/pages/listViewPage.dart';
 import 'package:lesson_1/pages/part_4.dart';
 import 'package:lesson_1/pages/table.dart';
 import 'package:lesson_1/utils/routes.dart';
+import 'package:lesson_1/widgets/themes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,9 +21,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MXK Learning App',
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          fontFamily: GoogleFonts.laila().fontFamily),
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       //part 2 Input,Radio,Check,Label
       //home: const HomePage());
 
@@ -41,11 +42,12 @@ class MyApp extends StatelessWidget {
 
       //TODO: Part 5
       //Login With Navigation
-
+      initialRoute: MyRoutes.dashboardRoute,
       routes: {
         "/": (context) => const Part4(),
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.loginRoute: (context) => const Part4(),
+        MyRoutes.dashboardRoute: (context) => const Dashboard(),
       },
     );
   }
