@@ -15,104 +15,129 @@ class Part4 extends StatefulWidget {
 class _Part4State extends State<Part4> {
   String result = "";
 
+  final _loginFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              "assets/images/login_img.png",
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const Text(
-              "Welcome",
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        hintText: "Enter Username", label: Text("Username")),
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: "Enter Password",
-                      label: Text("Password"),
-                    ),
-                  ),
-                ],
+        child: Form(
+          key: _loginFormKey,
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/images/login_img.png",
+                fit: BoxFit.cover,
               ),
-            ),
-
-            // InkWell(
-            //   onTap: () async {
-            //     setState(() {
-            //       requestApi = true;
-            //     });
-
-            //     await Future.delayed(const Duration(seconds: 2));
-            //     Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
-            //   },
-            //   child: AnimatedContainer(
-            //     duration: const Duration(seconds: 2),
-            //     width: requestApi ? 50.0 : 150.0,
-            //     height: 50.0,
-            //     alignment: Alignment.center,
-            //     child: requestApi
-            //         ? const Icon(Icons.done, color: Colors.white)
-            //         : const Text(
-            //             "Login",
-            //             style: TextStyle(
-            //               color: Colors.white,
-            //               fontWeight: FontWeight.bold,
-            //               fontSize: 22.0,
-            //             ),
-            //           ),
-            //     decoration: BoxDecoration(
-            //       color: Colors.deepPurpleAccent,
-            //       borderRadius: BorderRadius.circular(requestApi ? 80 : 8),
-            //       //shape: requestApi ? BoxShape.circle : BoxShape.rectangle,
-            //     ),
-            //   ),
-            // )
-
-            ElevatedButton(
-              onPressed: () async {
-                setState(() {
-                  result = "in-progress";
-                });
-                userAuthentication();
-              },
-              child: result == "in-progress"
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 3,
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Text(
+                "Welcome",
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 32.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if (value.toString().isEmpty) {
+                          return 'Username cannot be empty';
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Enter Username",
+                        label: Text("Username"),
                       ),
-                    )
-                  : result == 'done'
-                      ? const Icon(
-                          Icons.done,
+                    ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value.toString().isEmpty) {
+                          return 'Password cannot be empty';
+                        } else if (value.toString().length > 6) {
+                          return 'Username should be atleast 6 characters';
+                        }
+                      },
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: "Enter Password",
+                        label: Text("Password"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // InkWell(
+              //   onTap: () async {
+              //     setState(() {
+              //       requestApi = true;
+              //     });
+
+              //     await Future.delayed(const Duration(seconds: 2));
+              //     Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+              //   },
+              //   child: AnimatedContainer(
+              //     duration: const Duration(seconds: 2),
+              //     width: requestApi ? 50.0 : 150.0,
+              //     height: 50.0,
+              //     alignment: Alignment.center,
+              //     child: requestApi
+              //         ? const Icon(Icons.done, color: Colors.white)
+              //         : const Text(
+              //             "Login",
+              //             style: TextStyle(
+              //               color: Colors.white,
+              //               fontWeight: FontWeight.bold,
+              //               fontSize: 22.0,
+              //             ),
+              //           ),
+              //     decoration: BoxDecoration(
+              //       color: Colors.deepPurpleAccent,
+              //       borderRadius: BorderRadius.circular(requestApi ? 80 : 8),
+              //       //shape: requestApi ? BoxShape.circle : BoxShape.rectangle,
+              //     ),
+              //   ),
+              // )
+
+              ElevatedButton(
+                onPressed: () {
+                  userValidation();
+                },
+                child: result == "in-progress"
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
                           color: Colors.white,
-                        )
-                      : const Text("Login"),
-              style: TextButton.styleFrom(minimumSize: const Size(120, 40)),
-            ),
-          ],
+                          strokeWidth: 3,
+                        ),
+                      )
+                    : result == 'done'
+                        ? const Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          )
+                        : const Text("Login"),
+                style: TextButton.styleFrom(minimumSize: const Size(120, 40)),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  userValidation() {
+    if (_loginFormKey.currentState!.validate()) {
+      setState(() {
+        result = "in-progress";
+      });
+      userAuthentication();
+    }
   }
 
   userAuthentication() async {
@@ -120,12 +145,11 @@ class _Part4State extends State<Part4> {
         'https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0';
 
     var res = await http.read(Uri.parse(api));
-    var json = jsonDecode(res.toString());
-    print(json["dataseries"]);
+    // var json = jsonDecode(res.toString());
     setState(() {
       result = "done";
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
   }
 }
