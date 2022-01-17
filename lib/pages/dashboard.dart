@@ -32,13 +32,36 @@ class _DashboardState extends State<Dashboard> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ItemList.products.isNotEmpty
-            ? ListView.builder(
+            ? GridView.builder(
                 itemCount: ItemList.products.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) {
-                  return ItemWidget(
-                    item: ItemList.products[index],
-                  );
-                  // return Text("data");
+                  final item = ItemList.products[index];
+                  return Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: GridTile(
+                        header: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: const BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                          child: Text(item.name),
+                        ),
+                        child: Image.network(item.image),
+                        footer: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          child: Text(
+                            "Rs. ${item.id}",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ));
                 },
               )
             : const Center(
