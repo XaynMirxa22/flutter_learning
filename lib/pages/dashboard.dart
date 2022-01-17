@@ -1,74 +1,60 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:lesson_1/models/catalog.dart';
+import 'package:lesson_1/widgets/drawer.dart';
+import 'package:lesson_1/widgets/item_widget.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    super.initState();
+
+    loadDataFromJson();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text('Dashboard')),
+        title: const Center(child: Text('Dashboard')),
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.deepPurple,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const [
-              DrawerHeader(
-                  padding: EdgeInsets.zero,
-                  child: UserAccountsDrawerHeader(
-                    accountName: Text("Mirxa Hasnain Ali Hamxa"),
-                    accountEmail: Text("mirxa.hasnain@gmail.com"),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/acc_person.jpg'),
-                    ),
-                  )),
-              ListTile(
-                leading: Icon(
-                  CupertinoIcons.home,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Home",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  CupertinoIcons.profile_circled,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Profile",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  CupertinoIcons.mail,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Email Me",
-                  textScaleFactor: 1.2,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+      drawer: MyDrawer.get(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ItemList.products.isNotEmpty
+            ? ListView.builder(
+                itemCount: ItemList.products.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(
+                    item: ItemList.products[index],
+                  );
+                  // return Text("data");
+                },
               )
-            ],
-          ),
-        ),
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
+  }
+
+  void loadDataFromJson() async {
+    var data = await rootBundle.loadString('assets/files/item.json');
+    var jsonData = jsonDecode(data)["products"];
+    // print(jsonData);
+    ItemList.products =
+        List.from(jsonData).map<Item>((item) => Item.fromMap(item)).toList();
+    print(ItemList.products);
+    setState(() {});
   }
 }
