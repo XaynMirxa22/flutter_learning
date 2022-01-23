@@ -46,19 +46,19 @@ class _DashboardState extends State<Dashboard> {
                         header: Container(
                           padding: const EdgeInsets.all(12),
                           decoration: const BoxDecoration(
-                            color: Colors.deepPurple,
+                            color: Colors.grey,
                           ),
                           child: Text(item.name),
                         ),
-                        child: Image.network(item.image),
+                        child: Image.network(
+                          item.image,
+                        ),
                         footer: Container(
                           padding: const EdgeInsets.all(12),
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                          ),
+                          decoration: const BoxDecoration(color: Colors.grey),
                           child: Text(
                             "Rs. ${item.id}",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ));

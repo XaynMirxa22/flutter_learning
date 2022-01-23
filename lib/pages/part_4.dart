@@ -156,6 +156,6 @@ class _Part4State extends State<Part4> {
     setState(() {
       result = "done";
     });
-    Navigator.pushReplacementNamed(context, MyRoutes.homeRoute);
+    Navigator.pushReplacementNamed(context, MyRoutes.dashboardRoute);
   }
 }

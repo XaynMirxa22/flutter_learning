@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
 
       //TODO: Part 5
       //Login With Navigation
-      initialRoute: MyRoutes.dashboardRoute,
+      initialRoute: "/",
       routes: {
         "/": (context) => const Part4(),
         MyRoutes.homeRoute: (context) => const HomePage(),
