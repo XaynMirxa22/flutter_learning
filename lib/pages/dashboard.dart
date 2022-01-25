@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lesson_1/models/catalog.dart';
+import 'package:lesson_1/utils/routes.dart';
 import 'package:lesson_1/widgets/dashboard_widgets/catalog_header.dart';
 import 'package:lesson_1/widgets/dashboard_widgets/catalog_list.dart';
 import 'package:lesson_1/widgets/themes.dart';
@@ -27,6 +30,11 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: MyTheme.creamColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          backgroundColor: MyTheme.darkBlueishColor,
+          child: const Icon(CupertinoIcons.cart),
+        ),
         body: SafeArea(
           child: Container(
             padding: Vx.m32,

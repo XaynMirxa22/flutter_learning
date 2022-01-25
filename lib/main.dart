@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lesson_1/pages/cart_page.dart';
 import 'package:lesson_1/pages/dashboard.dart';
 import 'package:lesson_1/pages/gridViewPage.dart';
 import 'package:lesson_1/pages/homepage.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.homeRoute: (context) => const HomePage(),
         MyRoutes.loginRoute: (context) => const Part4(),
         MyRoutes.dashboardRoute: (context) => const Dashboard(),
+        MyRoutes.cartRoute: (context) => const CartPage(),
       },
     );
   }

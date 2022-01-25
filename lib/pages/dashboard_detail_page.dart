@@ -12,7 +12,10 @@ class DashboardDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: ButtonBar(
@@ -28,8 +31,8 @@ class DashboardDetailPage extends StatelessWidget {
                   shape: MaterialStateProperty.all(
                     const StadiumBorder(),
                   )),
-              child: "Buy".text.make(),
-            ).wh(100.0, 50.0)
+              child: "Add To Cart".text.make(),
+            ).wh(120.0, 50.0)
           ],
         ).p32(),
       ),
@@ -55,8 +58,14 @@ class DashboardDetailPage extends StatelessWidget {
                       catalog!.name.text.xl
                           .textStyle(context.captionStyle!)
                           .make(),
+                      "Amet aliquyam dolor dolore sed dolores, Amet aliquyam dolor dolore sed dolores, duo dolore kasd sed takimata ut elitr et magna. Invidunt diam rebum kasd et ea eirmod lorem kasd ut."
+                          .text
+                          .justify
+                          .textStyle(context.captionStyle!)
+                          .make()
+                          .p16()
                     ],
-                  ).py64(),
+                  ).py32(),
                 ),
               ))
             ],
