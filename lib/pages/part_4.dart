@@ -113,8 +113,7 @@ class _Part4State extends State<Part4> {
               ElevatedButton(
                 onPressed: () {
                   // userValidation();
-                  Navigator.pushReplacementNamed(
-                      context, MyRoutes.dashboardRoute);
+                  context.vxNav.push(Uri.parse(MyRoutes.dashboardRoute));
                 },
                 child: result == "in-progress"
                     ? const SizedBox(
@@ -160,6 +159,7 @@ class _Part4State extends State<Part4> {
     setState(() {
       result = "done";
     });
-    Navigator.pushReplacementNamed(context, MyRoutes.dashboardRoute);
+    // Navigator.pushReplacementNamed(context, MyRoutes.dashboardRoute);
+    context.vxNav.push(Uri.parse(MyRoutes.dashboardRoute));
   }
 }

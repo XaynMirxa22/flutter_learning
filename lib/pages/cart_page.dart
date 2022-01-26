@@ -39,7 +39,19 @@ class CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          VxConsumer(
+          //For updations automatically
+          // VxConsumer(
+          //     builder: (context, __, _) {
+          //       return "\$${_cart!.totalPrice}"
+          //           .text
+          //           .xl5
+          //           .color(context.accentColor)
+          //           .make();
+          //     },
+          //     mutations: {RemoveMutation},
+          //     notifications: {}),
+
+          VxBuilder(
               builder: (context, __, _) {
                 return "\$${_cart!.totalPrice}"
                     .text
@@ -47,8 +59,8 @@ class CartTotal extends StatelessWidget {
                     .color(context.accentColor)
                     .make();
               },
-              mutations: {RemoveMutation},
-              notifications: {}),
+              mutations: {RemoveMutation}),
+
           30.0.widthBox,
           ElevatedButton(
             style: ButtonStyle(

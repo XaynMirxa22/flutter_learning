@@ -13,15 +13,13 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VxBox(
-        child: Row(
-      children: [
-        Hero(
-          tag: Key(catalog!.id),
-          child: CatalogImage(image: catalog!.image),
-        ),
-        Expanded(
-            child: Column(
+    var children2 = [
+      Hero(
+        tag: Key(catalog!.id),
+        child: CatalogImage(image: catalog!.image),
+      ),
+      Expanded(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -37,8 +35,17 @@ class CatalogItem extends StatelessWidget {
               ],
             ).pOnly(right: 8.0)
           ],
-        ))
-      ],
-    )).color(context.cardColor).rounded.square(150).make().py8();
+        ).p(context.isMobile ? 0 : 16.0),
+      )
+    ];
+    return VxBox(
+      child: context.isMobile
+          ? Row(
+              children: children2,
+            )
+          : Column(
+              children: children2,
+            ),
+    ).color(context.cardColor).rounded.square(150).make().py8();
   }
 }
