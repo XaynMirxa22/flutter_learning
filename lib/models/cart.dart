@@ -1,3 +1,6 @@
+import 'package:velocity_x/velocity_x.dart';
+
+import 'package:lesson_1/core/store.dart';
 import 'package:lesson_1/models/catalog.dart';
 
 class CartModel {
@@ -22,15 +25,27 @@ class CartModel {
 
   //get total price of cart
   String get totalPrice =>
-      items.fold("0", (total, current) => total + current.id);
+      items.fold("0", (total, current) => total + current.id[0]);
+}
 
-  //add item in cart
-  void add(Item item) {
-    _itemIds.add(item.id);
+class AddMutation extends VxMutation<MyStore> {
+  final Item item;
+  AddMutation({
+    required this.item,
+  });
+  @override
+  perform() {
+    store!.cart!._itemIds.add(item.id);
   }
+}
 
-  //remove item from cart
-  void remove(Item item) {
-    _itemIds.remove(item.id);
+class RemoveMutation extends VxMutation<MyStore> {
+  final Item item;
+  RemoveMutation({
+    required this.item,
+  });
+  @override
+  perform() {
+    store!.cart!._itemIds.remove(item.id);
   }
 }

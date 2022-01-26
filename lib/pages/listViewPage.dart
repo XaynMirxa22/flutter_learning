@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lesson_1/main.dart';
 
-class ListViewPage extends StatefulWidget {
-  const ListViewPage({
+class ListViewPage extends StatelessWidget {
+  ListViewPage({
     Key? key,
   }) : super(key: key);
-
-  @override
-  State<ListViewPage> createState() => _ListViewPageState();
-}
-
-class _ListViewPageState extends State<ListViewPage> {
-  TextEditingController _nameController = new TextEditingController();
 
   var enterName = "";
   bool? checkBox1 = false;

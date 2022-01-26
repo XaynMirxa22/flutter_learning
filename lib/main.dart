@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lesson_1/core/store.dart';
 import 'package:lesson_1/pages/cart_page.dart';
 import 'package:lesson_1/pages/dashboard.dart';
-import 'package:lesson_1/pages/gridViewPage.dart';
 import 'package:lesson_1/pages/homepage.dart';
-import 'package:lesson_1/pages/listViewPage.dart';
 import 'package:lesson_1/pages/part_4.dart';
-import 'package:lesson_1/pages/table.dart';
 import 'package:lesson_1/utils/routes.dart';
 import 'package:lesson_1/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(VxState(
+    store: MyStore(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,29 +22,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MXK Learning App',
+      title: 'MXK Product App',
       themeMode: ThemeMode.dark,
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
-      //part 2 Input,Radio,Check,Label
-      //home: const HomePage());
-
-      //TODO:part 3
-      //List View
-      // home: const ListViewPage());
-
-      //Grid View
-      //home: const GridViewPage());
-
-      //Table View
-      //home: const TablePage());
-
-      //TODO: Part4
-      // Adding Image
-      //home: Part4()
-
-      //TODO: Part 5
-      //Login With Navigation
       initialRoute: MyRoutes.cartRoute,
       routes: {
         "/": (context) => const Part4(),
