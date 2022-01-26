@@ -1,4 +1,5 @@
 import 'package:lesson_1/models/catalog.dart';
+import 'package:lesson_1/widgets/dashboard_widgets/add_to_card.dart';
 import 'package:lesson_1/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';
@@ -24,15 +25,8 @@ class DashboardDetailPage extends StatelessWidget {
           buttonPadding: EdgeInsets.zero,
           children: [
             "\$999".text.bold.xl4.red800.make(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(context.theme.buttonColor),
-                  shape: MaterialStateProperty.all(
-                    const StadiumBorder(),
-                  )),
-              child: "Add To Cart".text.make(),
+            AddToCart(
+              catalog: catalog,
             ).wh(120.0, 50.0)
           ],
         ).p32(),
