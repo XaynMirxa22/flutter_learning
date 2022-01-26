@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
+import 'package:velocity_x/velocity_x.dart';
 import 'package:http/http.dart' as http;
 import 'package:lesson_1/utils/routes.dart';
 
@@ -20,7 +20,7 @@ class _Part4State extends State<Part4> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
       child: SingleChildScrollView(
         child: Form(
           key: _loginFormKey,
@@ -112,7 +112,9 @@ class _Part4State extends State<Part4> {
 
               ElevatedButton(
                 onPressed: () {
-                  userValidation();
+                  // userValidation();
+                  Navigator.pushReplacementNamed(
+                      context, MyRoutes.dashboardRoute);
                 },
                 child: result == "in-progress"
                     ? const SizedBox(
@@ -129,7 +131,9 @@ class _Part4State extends State<Part4> {
                             color: Colors.white,
                           )
                         : const Text("Login"),
-                style: TextButton.styleFrom(minimumSize: const Size(120, 40)),
+                style: TextButton.styleFrom(
+                    minimumSize: const Size(120, 40),
+                    backgroundColor: context.theme.buttonColor),
               ),
             ],
           ),

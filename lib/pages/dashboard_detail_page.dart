@@ -16,8 +16,9 @@ class DashboardDetailPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -27,7 +28,7 @@ class DashboardDetailPage extends StatelessWidget {
               onPressed: () {},
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(MyTheme.darkBlueishColor),
+                      MaterialStateProperty.all(context.theme.buttonColor),
                   shape: MaterialStateProperty.all(
                     const StadiumBorder(),
                   )),
@@ -50,11 +51,15 @@ class DashboardDetailPage extends StatelessWidget {
                 arcType: VxArcType.CONVEY,
                 edge: VxEdge.TOP,
                 child: Container(
-                  color: Colors.white,
+                  color: context.cardColor,
                   width: context.screenWidth,
                   child: Column(
                     children: [
-                      catalog!.id.text.xl4.bold.make(),
+                      catalog!.id.text
+                          .color(context.accentColor)
+                          .xl4
+                          .bold
+                          .make(),
                       catalog!.name.text.xl
                           .textStyle(context.captionStyle!)
                           .make(),

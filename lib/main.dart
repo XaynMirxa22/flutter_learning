@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MXK Learning App',
+      themeMode: ThemeMode.dark,
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       //part 2 Input,Radio,Check,Label
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
 
       //TODO: Part 5
       //Login With Navigation
-      initialRoute: MyRoutes.dashboardRoute,
+      initialRoute: MyRoutes.cartRoute,
       routes: {
         "/": (context) => const Part4(),
         MyRoutes.homeRoute: (context) => const HomePage(),
