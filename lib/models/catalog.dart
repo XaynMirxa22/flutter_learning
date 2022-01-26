@@ -16,11 +16,14 @@ class Item {
 }
 
 class ItemList {
+  static final _itemModel = ItemList._interval();
+  ItemList._interval();
+  factory ItemList() => _itemModel;
+
   static List<Item> products = [];
 
   //get item by id
-  static Item getByID(String id) =>
-      products.firstWhere((element) => element.id == id);
+  Item getByID(String id) => products.firstWhere((element) => element.id == id);
 
-  static Item getByPos(int pos) => products[pos];
+  Item getByPos(int pos) => products[pos];
 }
